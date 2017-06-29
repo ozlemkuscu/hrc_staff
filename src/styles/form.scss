@@ -1,0 +1,85 @@
+#app-content-right .welcomemsg {
+  text-align: right;
+}
+
+#app-content-right .welcomemsg a {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/*#btn-adminSearch,
+#btn-changeView,
+#btn-extractExcel {
+  width: 100%;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}*/
+
+#admin_search {
+  margin-top: 5px;
+}
+
+#admininterface h2 {
+  font-size: 2em;
+  margin: 0;
+}
+
+#admininterface li.active a {
+  background-color: #346488;
+  color: white;
+}
+
+#admininterface li.active a:hover {
+  background-color: #346488 !important;
+  text-decoration: underline;
+}
+
+.content {
+  margin-top: 10px;
+}
+
+.tab-pane table {
+  display: none;
+}
+
+.tab-pane table tr td:last-child {
+  text-align: center !important;
+}
+
+.tab-pane table button {
+  width: 45%;
+  min-width: 120px;
+}
+
+.tab-pane.fade.active table {
+  display: table;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+#saveSubmit .form-group,
+.wir-item .form-group {
+  padding: 0 15px;
+}
+
+.back-to-top {
+  cursor: pointer;
+  display: none;
+  position: fixed;
+  bottom: 75px;
+  right: 25px;
+  z-index: 9999;
+}
+
+#btn-changeView,
+#btn-extractExcel {
+  width: 100%;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+#btn-adminSearch {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}

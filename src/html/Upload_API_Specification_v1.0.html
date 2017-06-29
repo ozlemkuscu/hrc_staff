@@ -1,0 +1,295 @@
+<html>
+<head>
+
+</head>
+
+<body style="margin-left: 20px; margin-right: 20px">
+
+<a name="top"></a>
+<h1>Upload API overview</h1>
+<p>
+  This is an API template. It is intended to provide solution developers,
+  technical leads, architects and other technical stakeholders information
+  about how the API works, and how to use it.
+</p>
+<p>
+  The upload API provides apps with the ability to upload binary files,
+  list, retrieve, change file status and copy files to Samba folder.
+</p>
+
+<h1>Configuration Resources</h1>
+
+<p>Properties are configurable using internal administration console </p>
+<table border="1">
+  <tbody>
+  <tr>
+    <td align="center">Property Name</td>
+    <td align="center">Description</td>
+  </tr>
+  <tr>
+    <td>database</td>
+    <td>database name</td>
+  </tr>
+  <tr>
+    <td>uploadSuffixes</td>
+    <td>allowable suffixes for binary uploads</td>
+  </tr>
+  <tr>
+    <td>mimetypes</td>
+    <td>allowable mime types for binary uploads</td>
+  </tr>
+  <tr>
+    <td>uploadMaxsize</td>
+    <td>allowable max size for each binary file to be uploaded</td>
+  </tr>
+  <tr>
+    <td>uploadTotalMaxsize</td>
+    <td>allowable total max file size for binary uploads</td>
+  </tr>
+  <tr>
+    <td>maxUploads</td>
+    <td>max number of binary files allowed for each upload</td>
+  </tr>
+  <tr>
+    <td>publicDownloadStatus</td>
+    <td> file status that allow for public download</td>
+  </tr>
+  <tr>
+    <td>unusedUploadsTTL</td>
+    <td>max time in minutes that file status has been null since created</td>
+  </tr>
+  <tr>
+    <td>smbShareFolder</td>
+    <td>Samba shared folder for copying binary files over</td>
+  </tr>
+  <tr>
+    <td>smbFunctionID</td>
+    <td>functional account id used in copying files to Samba folder</td>
+  </tr>
+  <tr>
+    <td>smbPwd</td>
+    <td>functional account password used in copying files to Samba folder</td>
+  </tr>
+
+  <tr>
+    <td>virusScanEnabled</td>
+    <td>flag to enable virus scan using Symantec Protection Engine</td>
+  </tr>
+
+  <tr>
+    <td>scanServerIP</td>
+    <td>IP address of Symantec Protection Engine </td>
+  </tr>
+  <tr>
+    <td>scanServerPort</td>
+    <td>port number of Symantec Protection Engine</td>
+  </tr>
+  <tr>
+    <td>streambased</td>
+    <td>flag indicating stream based virus scan</td>
+  </tr>
+  <tr>
+    <td>scanPolicy</td>
+    <td>Symantec Protection Engine Scan Policy (scan|scanrepair|scanrepairdelete|scandelete)</td>
+  </tr>
+
+  </tbody>
+</table>
+
+
+<h1>Environments</h1>
+<table border="1">
+  <tbody><tr>
+    <td align="center">Environment</td>
+    <td align="center">Base URL</td>
+  </tr>
+  <tr>
+    <td>DEV</td>
+    <td>http://was8-inter-dev.toronto.ca/cc_sr_v1/</td>
+  </tr>
+  <tr>
+    <td>QA</td>
+    <td>https://was-inter-qa.toronto.ca/cc_sr_v1/<br>http://was-inter-qa.toronto.ca/cc_sr_v1_app/</td>
+  </tr>
+  <tr>
+    <td>PROD</td>
+    <td>https://secure.toronto.ca/cc_sr_v1/<br>http://app.toronto.ca/cc_sr_v1_app/</td>
+  </tr>
+  </tbody></table>
+
+
+<a name="operations"></a>
+<h1>Operations</h1>
+<p>The Upload API provides the following operations:
+</p>
+<ul>
+  <li> <a href="#upload"> Upload </a> - operation to upload binary file</li>
+  <li> <a href="#listBinID"> List BinIDs </a> - server-side JavaScript API to retrieve a listing of BinIDs per file reference</li>
+  <li> <a href="#listMetadata"> List Metadata </a> - server-side JavaScript API to retrieve file metadata per BinIDs</li>
+  <li> <a href="#copySamba">Copy Files </a> - server-side JavaScript API to copy files to Samba folder per BinIDs</li>
+  <li> <a href="#changeStatusByBinID"> Change file status based on a specific BinID</a> - server-side JavaScript API to change the status of file per BinID</li>
+  <li> <a href="#changeStatusByReference"> Change file status based on specific file reference</a> - server-side JavaScript API to change the status of file per file reference</li>
+  <li> <a href="#clearAndSetExternalURL"> Clear file content </a> - server-side JavaScript API to clear file content after moved to other location</li>
+
+</ul>
+
+<hr>
+
+<a name="upload"></a>
+<h2><i>Upload</i> operation</h2>
+<p>This operation saves binary file to database and returns bin-id for the file. </p>
+
+<p>Request Method : POST</p>
+<p>Request Content-Type : multipart/form-data</p>
+<p>Response: Returns BIN_ID generated</p>
+
+<p align="right"> <a href="#operations"> Back to Operation </a> </p>
+
+<a name="listBinID"></a>
+<h2><i>List BinIDs</i> operation</h2>
+<p>This server-side JavaScript retrieves a list of BinIDs per file reference provided. </p>
+<pre class="prettyprint linenums"><i>upload.listBinIDByFileReference(String uploadConfigCode, String fileRef)</i>
+</pre>
+
+<h3><i>Examples:</i></h3>
+<h4>Request (positive)</h4>
+<pre class="prettyprint linenums">json={"functionName":"listBinIDByFileReference","uploadConfigCode":"eventcal","fileRef":"eventcal1"}
+</pre>
+<h4>Response(positive)</h4>
+<pre class="prettyprint linenums">["1463580398180_101","1463584578560_119"]
+</pre>
+<h4>Request(invalid query)</h4>
+<pre class="prettyprint linenums">json={"functionName":"listBinIDByFileReference","uploadConfigCode":"eventcal","fileRef":""}
+</pre>
+<h3>Response</h3>
+<pre class="prettyprint linenums">[missing fileref]
+</pre>
+<p align="right"> <a href="#operations"> Back to Operation </a> </p>
+
+<a name="listMetadata"></a>
+<h2><i>List Metadata</i> operation</h2>
+<p>This server-side JavaScript retrieves file metadata for BinIDs (comma seperated list) provided, excluding file content. </p>
+<pre class="prettyprint linenums"><i>upload.listBinMetadataByIDs(String uploadConfigCode, String binIDs)</i>
+</pre>
+
+<h3><i>Examples:</i></h3>
+<h4>Request (positive)</h4>
+<pre class="prettyprint linenums">json={"functionName":"listBinMetadataByIDs", "uploadConfigCode":"eventcal", "binIDs":"Luohl2Iolvbg-h5Yz9gnzQ,1Sr4QLKrsvE197fQkpZLHg"}
+</pre>
+<h4>Response(positive)</h4>
+<pre class="prettyprint linenums">[
+	{"FILE_MIMETYPE":"image\/jpeg","FILE_CREATED_BY":null,"BIN_ID":"Luohl2Iolvbg-h5Yz9gnzQ","FILE_SIZE":20326,"FILE_STATUS":"DownloadToSharedFolder","FILE_UPDATED":2016-06-10 14:54:56.582,"FILE_REFERENCE":"eventcal_1465584896352","FILE_FILENAME":"test1.jpeg","FILE_GROUP":"eventcal","FILE_EXT_URL":null,"FILE_UPDATED_BY":null},
+	{"FILE_MIMETYPE":"image\/gif","FILE_CREATED_BY":null,"BIN_ID":"1Sr4QLKrsvE197fQkpZLHg","FILE_SIZE":20326,"FILE_STATUS":"DownloadToSharedFolder","FILE_UPDATED":2016-06-10 13:13:29.667,"FILE_REFERENCE":"eventcal_1465578809526","FILE_FILENAME":"test111.gif","FILE_GROUP":"eventcal","FILE_EXT_URL":null,"FILE_UPDATED_BY":null}
+]
+</pre>
+<h4>Request(invalid query)</h4>
+<pre class="prettyprint linenums">json={"functionName":"listBinMetadataByIDs", "uploadConfigCode":"eventcal", "binIDs":""}
+</pre>
+<h4>Response</h4>
+<pre class="prettyprint linenums">[missing binIDs]
+</pre>
+
+
+<p align="right"> <a href="#operations"> Back to Operation </a> </p>
+
+<a name="copySamba"></a>
+<h2><i>Copy Files to Samba Folder</i> operation</h2>
+<p>This server-side JavaScript copy files to Samba folder for BinIDs
+  (comma seperated list) provided. Existing files in the folder will be
+  removed if deleteFlag is set to true.</p>
+<pre class="prettyprint linenums"><i>upload.copyFilesToSamba(String uploadConfigCode, String binIDs, boolean deleteFlag)</i>
+</pre>
+
+<h3><i>Examples:</i></h3>
+
+<h4>Request (positive)</h4>
+<pre class="prettyprint linenums">json={"functionName":"copyFilesToSamba", "uploadConfigCode":"eventcal", "binID":"zYPwLGDFnGODWeorsM6hDg,tTlfKjyJTLp8a8g_rAGFTQ, xRvmf7nnxV2JPUgxcSJIbQ", "deleteFlag":true}
+</pre>
+<h4>Response(positive)</h4>
+<pre class="prettyprint linenums">[Download to shared folder successfully.]
+</pre>
+
+<h4>Invalid Request</h4>
+<pre class="prettyprint linenums">json={"functionName":"copyFilesToSamba", "uploadConfigCode":"eventcal", "binID":"zYPwLGDFnGODWeorsM6hDg", "deleteFlag":true}
+</pre>
+<h4>Response</h4>
+<pre class="prettyprint linenums">[return specific error messages.]
+</pre>
+
+<p align="right"> <a href="#operations"> Back to Operation </a> </p>
+
+<a name="changeStatusByBinID"></a>
+<h2><i>Change File Status based on a specific BinID</i> operation</h2>
+<p>This server-side JavaScript changes file status based on a specific
+  BinID. Records of files exceeding unusedUploadsTTL will be removed.</p>
+<pre class="prettyprint linenums"><i>upload.changeStatusByBinID(String uploadConfigCode,String binID, String newStatusCode)</i>
+</pre>
+<h3><i>Examples:</i></h3>
+
+<h4>Request (positive)</h4>
+<pre class="prettyprint linenums">json={"functionName":"changeStatusByBinID", "uploadConfigCode":"eventcal", "binID":"xRvmf7nnxV2JPUgxcSJIbQ" , "newStatusCode":"newstatus"}
+</pre>
+<h4>Response(positive)</h4>
+<pre class="prettyprint linenums">[Status changed successfully.]
+</pre>
+
+<h4>Invalid Request</h4>
+<pre class="prettyprint linenums">json={"functionName":"changeStatusByBinID", "uploadConfigCode":"eventcal", "binID":"" , "newStatusCode":"newstatus"}
+</pre>
+<h4>Response</h4>
+<pre class="prettyprint linenums">[BIN_ID or config missing]
+</pre>
+
+<p align="right"> <a href="#operations"> Back to Operation </a> </p>
+
+<a name="changeStatusByReference"></a>
+<h2><i>Change File Status based on a specific file reference</i> operation</h2>
+<p>This server-side JavaScript changes file status based on a specific
+  file reference. Records of files exceeding unusedUploadsTTL will be
+  removed. </p>
+<pre class="prettyprint linenums"><i>upload.changeStatusByReference(String uploadConfigCode, String fileRef, String newStatusCode)</i>
+</pre>
+<h3><i>Examples:</i></h3>
+
+<h4>Request (positive)</h4>
+<pre class="prettyprint linenums">json={"functionName":"changeStatusByReference", "uploadConfigCode":"eventcal", "fileRef":"eventcal_1465911887864" , "newStatusCode":"newstatus"}
+</pre>
+<h4>Response(positive)</h4>
+<pre class="prettyprint linenums">[Status changed successfully.]
+</pre>
+
+<h4>Invalid Request</h4>
+<pre class="prettyprint linenums">json={"functionName":"changeStatusByReference", "uploadConfigCode":"eventcal", "fileRef":"" , "newStatusCode":"newstatus"}
+</pre>
+<h4>Response</h4>
+<pre class="prettyprint linenums">[Invalid config code or FILE_REFERENCE.]
+</pre>
+
+<p align="right"> <a href="#operations"> Back to Operation </a> </p>
+
+<a name="clearAndSetExternalURL"></a>
+<h2><i>Clear File Content</i> operation</h2>
+<p>This server-side JavaScript clear file content and records that location it was moved to in the database.</p>
+<pre class="prettyprint linenums"><i>upload.clearAndSetExternalURL(String uploadConfigCode, String binID, String externalURL)</i>
+</pre>
+<h3><i>Examples:</i></h3>
+
+<h4>Request (positive)</h4>
+<pre class="prettyprint linenums">json={"functionName":"clearAndSetExternalURL", "uploadConfigCode":"eventcal", "binID":"w578lnqK_ce3aRwC2k7Nyw" , "externalURL":"http://insideto.toronto.ca/itweb/support/it-services/it-training"}
+</pre>
+<h4>Response(positive)</h4>
+<pre class="prettyprint linenums">[Update successfully.]
+</pre>
+
+<h4>Invalid Request</h4>
+<pre class="prettyprint linenums">json={"functionName":"clearAndSetExternalURL", "uploadConfigCode":"eventcal", "binID":"" , "externalURL":""}
+</pre>
+<h4>Response</h4>
+<pre class="prettyprint linenums">[empty or invalid externalURL or config.]
+</pre>
+<p align="right"> <a href="#operations"> Back to Operation </a> </p>
+
+
+<p align="right"> <a href="#top"> Top </a> </p>
+</body>
+</html>

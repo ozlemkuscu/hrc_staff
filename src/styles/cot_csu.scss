@@ -1,0 +1,174 @@
+#app-content-right .welcomemsg {text-align: right;}
+#app-content-right .welcomemsg a {text-decoration: underline; font-weight: bold;}
+#adminsearchbtn, #excelextract {width: 100%; margin-right: 0px !important;margin-left: 0px !important;}
+#admin_search {margin-top: 5px;}
+#admininterface h2 {font-size: 2em; margin:0px;}
+#admininterface li.active a {background-color: #346488; color: white;}
+#admininterface li.active a:hover {background-color: #346488 !important; text-decoration:underline;}
+.tab-pane table {display:none;}
+.tab-pane table tr td:last-child {text-align: center !important;}
+.tab-pane table button {}
+#recyclebin table button {width: 25%; min-width:120px;}
+#recyclebin table button:last-child {width: 40%;min-width:190px;}
+.tab-pane.fade.active table {display:table;}
+#admininterface tr.statusupdate td {background-color: lightyellow !important;}
+#familysurveyform h2 {display: none;}
+#serviceModalLabel {font-size: 2em !important;}
+.btn-primary {
+  color: #fff;
+  background-color: #175689;
+  border-color: #0e4672;
+}
+.btn-primary:focus,
+.btn-primary.focus {
+  color: #fff;
+  background-color: #12446c;
+  border-color: #0b3555;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #12446c;
+  border-color: #0b3555;
+}
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #286090;
+  border-color: #204d74;
+}
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.open > .dropdown-toggle.btn-primary:hover,
+.btn-primary:active:focus,
+.btn-primary.active:focus,
+.open > .dropdown-toggle.btn-primary:focus,
+.btn-primary:active.focus,
+.btn-primary.active.focus,
+.open > .dropdown-toggle.btn-primary.focus {
+  color: #fff;
+  background-color: #204d74;
+  border-color: #122b40;
+}
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background-image: none;
+}
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+.btn-success {
+  color: #fff;
+  background-color: #5c8014;
+  border-color: #40590d;
+}
+.btn-success:focus,
+.btn-success.focus {
+  color: #fff;
+  background-color: #486410;
+  border-color: #2c3d09;
+}
+.btn-success:hover {
+  color: #fff;
+  background-color: #486410;
+  border-color: #2c3d09;
+}
+.btn-success:active,
+.btn-info {
+  color: #fff;
+  background-color: #696969;
+  border-color: #454545;
+}
+.btn-info:focus,
+.btn-info.focus {
+  color: #fff;
+  background-color: #595959;
+  border-color: #353535;
+}
+.btn-info:hover {
+  color: #fff;
+  background-color: #595959;
+  border-color: #353535;
+}
+.btn-info:active,
+.btn-warning {
+  color: #fff;
+  background-color: #b95b01;
+  border-color: #8d4601;
+}
+.btn-warning:focus,
+.btn-warning.focus {
+  color: #fff;
+  background-color: #974901;
+  border-color: #6e3701;
+}
+.btn-warning:hover {
+  color: #fff;
+  background-color: #974901;
+  border-color: #6e3701;
+}
+.btn-warning:active,
+.btn-warning.active,
+.open > .dropdown-toggle.btn-warning {
+  color: #fff;
+  background-color: #ec971f;
+  border-color: #d58512;
+}
+.btn-warning:active:hover,
+.btn-danger {
+  color: #fff;
+  background-color: #b33b3a;
+  border-color: #9e2625;
+}
+.btn-danger:focus,
+.btn-danger.focus {
+  color: #fff;
+  background-color: #993232;
+  border-color: #831f1f;
+}
+.btn-danger:hover {
+  color: #fff;
+  background-color: #993232;
+  border-color: #831f1f;
+}
+.btn-danger:active,
+#custom-search-input{
+  padding: 3px;
+  border: solid 1px #E4E4E4;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+#custom-search-input input{
+  border: 0;
+  box-shadow: none;
+}
+
+#custom-search-input button{
+  margin: 2px 0 0 0;
+  background: none;
+  box-shadow: none;
+  border: 0;
+  color: #666666;
+  padding: 0 8px 0 10px;
+  border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover{
+  border: 0;
+  box-shadow: none;
+  border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+  font-size: 23px;
+}
+::-ms-clear {
+  display: none;
+}
+
+.form-control-clear {
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+}

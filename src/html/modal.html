@@ -1,0 +1,39 @@
+<div class="modal fade confirm-create-report" tabindex="-1" role="dialog" aria-labelledby="confirmCreateReport">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <!--h4 id="confirmCreateReport" class="modal-title">{{modal.confirmCreateReport}}</h4-->
+         <h4 id="confirmCreateReport" class="modal-title">{{reports.title}}</h4>
+      </div>
+      <div id="reportTypeElement" class="col-xs-12 col-md-12 form-group form-group-vertical has-feedback">
+        <div><!--label class="control-label" for="reportType"><span>{{modal.reportType}}</span></label-->
+        <br>
+        <label class="control-label" for="reportType"><span>{{reportType.title}}</span></label>
+          <div class="entryField"><select name="reportType" id="reportType" class="form-control" data-fv-field="reportType">
+            {{#reportType.choices}}
+            <option value={{value}}>{{text}}</option>
+            {{/reportType.choices}}</select>
+            <i class="form-control-feedback" data-fv-icon-for="contactHow" style="display: none;"></i>
+          </div>
+        </div>
+      </div>
+      <div id="reportYearElement" class="col-xs-12 col-md-12 form-group form-group-vertical has-feedback">
+        <div><!--label class="control-label" for="reportYear"><span>{{modal.reportYear}}</span></label-->
+        <label class="control-label" for="reportYear"><span>{{reportYear.title}}</span></label>
+          <div class="entryField"><select name="reportYear" id="reportYear" class="form-control" data-fv-field="reportYear">
+            {{#reportYear.choices}}
+            <option value={{value}}>{{text}}</option>
+            {{/reportYear.choices}}
+            </select>
+            <i class="form-control-feedback" data-fv-icon-for="contactHow" style="display: none;"></i>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-create-report"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {{button.createReport}}</button>
+      </div>
+    </div>
+  </div>
+</div>
