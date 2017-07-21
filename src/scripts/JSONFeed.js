@@ -469,6 +469,7 @@ callback({
           'eventDispatcher': '/rest/COTEventDispatcher_V2/REST',
           'upload': '/cc_sr_admin_v1/upload/',
           'session': '/cc_sr_admin_v1/session/',
+          'timeout': 30
         },
         'api_public': {
           'post': '/cc_sr_v1/submit/',

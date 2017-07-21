@@ -431,7 +431,7 @@ function newPage(query) {
           });
         }
       }
-      $("#viewtitle").html('Submission' +config.timeOutMsg);
+      $("#viewtitle").html('Submission' + config.timeOutMsg);
       loadForm("#new-form", null, null, null, form_id, 'human_rights');
     });
   }
