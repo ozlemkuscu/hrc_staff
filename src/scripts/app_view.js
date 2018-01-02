@@ -4,14 +4,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/**
- * Created by gperry2 on 03/14/2017.
- */
-
 var cc_retrieve_view = function () {
   function cc_retrieve_view(args) {
+   
     _classCallCheck(this, cc_retrieve_view);
-
     // url of rest api data source
     this.url = args.url;
     //dom object to inject table
@@ -29,7 +25,6 @@ var cc_retrieve_view = function () {
     this.dt;
   }
   //function to generate a unique id for the table
-
 
   _createClass(cc_retrieve_view, [{
     key: 'uniqueId',
@@ -93,7 +88,6 @@ var cc_retrieve_view = function () {
             //retrieve api buries the submission data in the payload object.
             //we want the payload in the main object so we use jquery extent to merge.
             var return_data = new Array();
-            //let dateFormat = 'YYYY/MM/DD';
             $.each(json, function (i, row) {
               row.updated = moment(row.updated).format(dateFormat);
               row.created = moment(row.created).format(dateFormat);
@@ -140,12 +134,6 @@ var cc_retrieve_view = function () {
               column.draw();
             }
             );
-            /*     if (_this.addScroll) {
-                   this.api().columns().every(function () {
-                     var column = this;
-                     this.draw();
-                   });
-                 } // end of if (_this.addScroll) {*/
           }
         }
       });
@@ -153,6 +141,5 @@ var cc_retrieve_view = function () {
       return this.dt;
     }
   }]);
-
   return cc_retrieve_view;
 }();

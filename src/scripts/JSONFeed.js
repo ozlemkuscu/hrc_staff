@@ -33,13 +33,9 @@ callback({
         },
         'title': 'Human Rights Complaints',
         'v2': { 'title': "Human Rights Complaints" },
-        'dateTimeFormat': 'MM/DD/YYYY hh:mm',
-        'dateTimeFormat2': 'YYYY/MM/DD hh:mm',
-        'dateTimeFormat3': 'MM/DD/YYYY hh:mm a',
+        'dateTimeFormat': 'MM/DD/YYYY HH:mm',
+        'dateTimeFormat3': 'MM/DD/YYYY HH:mm',
         'dateFormat': 'MM/DD/YYYY',
-        'dateFormat2': 'YYYY-MM-DD',
-        'dateFormatView': 'YYYY/MM/DD h:mm a',
-        'timeFormat': 'h:mm a',
         'default_repo': 'human_rights',
         'formName': { 'demo': 'Human Rights Complaint Form' },
         'timeOutMsg': '<br><br><p><strong>The session will time out after 15 minutes of inactivity, please save your work.</strong></p>',
@@ -477,7 +473,8 @@ callback({
         },
         'members': {
           'hrc_g': 'G',
-          'hrc_admin': 'testweb1,human_rights_user,human_rights_admin,okuscu,bkiri,cfaux,jneiman,ksellar,ucowieso'
+          'hrc_admin': ['testweb1','human_rights_user','human_rights_admin','okuscu','bkiri','cfaux','jneiman','ksellar','ucowieso']
+          // OLD 'hrc_admin': 'testweb1,human_rights_user,human_rights_admin,okuscu,bkiri,cfaux,jneiman,ksellar,ucowieso'
         },
         'messages': {
           'current': '',
@@ -638,7 +635,7 @@ callback({
         'admin':
         {
           'myDropzonePublic': {
-            "acceptedFiles": "image/*,application/pdf,application/PDF,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "acceptedFiles": "image/*,application/pdf,application/PDF,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain",
             "maxFiles": 1,
             "dictDefaultMessage": "Drop files here or <button class='btn-link' aria-label='File Upload - Drop files here or click to upload' type='button'>select</button> to upload.",
             "maxFilesize": 10,
@@ -648,7 +645,7 @@ callback({
           },
 
           'myDropzone': {
-            "acceptedFiles": "image/*,application/pdf,application/PDF,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "acceptedFiles": "image/*,application/pdf,application/PDF,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain",
             "maxFiles": 20,
             "dictDefaultMessage": "Drop files here or <button class='btn-link' aria-label='File Upload - Drop files here or click to upload' type='button'>select</button> to upload.",
             "maxFilesize": 10,
@@ -657,7 +654,7 @@ callback({
             "dictMaxFilesExceeded": "Maximum 20 uploaded files"
           },
           'staffDropzone': {
-            "acceptedFiles": "image/*,application/pdf,application/PDF,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "acceptedFiles": "image/*,application/pdf,application/PDF,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain",
             "maxFiles": 20,
             "dictDefaultMessage": "Drop files here or <button class='btn-link' aria-label='File Upload - Drop files here or click to upload' type='button'>select</button> to upload.",
             "maxFilesize": 10,

@@ -6,6 +6,8 @@
 let myDropzone = void 0;
 let staffDropzone = void 0;
 let form;
+let DZ_remove = [];
+
 //let sessionStatus = false;
 
 function getFormJSON(form_id) {
@@ -22,7 +24,7 @@ function checkFileUploads(payload) {
         binLoc = binLoc + "," + item.bin_id;
       }
     })
-    queryString = "&KeepFiles=" + binLoc;
+    queryString = "&keepFiles=" + binLoc;
   }
 
   if (payload.staff_uploads[0]) {
@@ -36,12 +38,11 @@ function checkFileUploads(payload) {
   }
 
   if (binLoc != "") {
-    queryString = "&KeepFiles=" + binLoc;
+    queryString = "&keepFiles=" + binLoc;
   }
 
   return queryString;
 }
-
 function saveReport(action, payload, msg, form_id, repo) {
   // $(".btn").prop('disabled', true);
 
@@ -118,6 +119,16 @@ function updateReport(fid, action, payload, msg, repo, formData) {
     switch (action) {
       case 'save':
         hasher.setHash(fid + '?alert=success&msg=' + msg.done + '&ts=' + new Date().getTime());
+        if (DZ_remove.length > 0) {
+          $.each(DZ_remove, function (i, deleteRowURL) {
+            $.get(deleteRowURL, function (response) {
+              //  console.log("deleted success", deleteRowURL);
+            }).fail(function () {
+              console.log('Failed to update attachments with this url parameter', deleteRowURL);
+            });
+          })
+        }
+        DZ_remove = [];
         break;
       case 'updateAttachments':
         break;
@@ -357,6 +368,8 @@ function loadForm(destinationSelector, data, fid, status, form_id, repo, allJSON
   let showAttachmentSection = false;
   let debugMode = false;
 
+  DZ_remove = [];
+
   //$(destinationSelector).empty();
   //  let sections = $.merge($.merge(getAdminSectionsTop(), getSubmissionSections()), getAdminSectionsBottom());
   let sections = $.merge(getSubmissionSections(data), getAdminSectionsBottom(data));
@@ -415,12 +428,6 @@ function loadForm(destinationSelector, data, fid, status, form_id, repo, allJSON
     // Set created by and modified by to current user
     $("#createdBy, #modifiedBy").val(modifiedUsername);
     var dataCreated = new Date();
-
-
-    var dataCreated = new Date();
-    // dataCreatedFormatted = moment(dataCreated).format(config.dateTimeFormat);
-    // $("#complaintCreated").val(dataCreatedFormatted);
-
     $("#complaintCreated").val(dataCreated);
     $("#yearCreated").val(dataCreated.getFullYear());
 
@@ -436,21 +443,8 @@ function loadForm(destinationSelector, data, fid, status, form_id, repo, allJSON
       $("#complaintCreated").val(moment(allJSON.created).format(config.dateTimeFormat));
     }
 
-    //    if ($("#yearCreated").val() == "") {
-    //      var dataCreated = new Date(allJSON.created);
-    //      $("#yearCreated").val(dataCreated.getFullYear());
-    //    }
-
     showUploads(myDropzone, 'uploads', data, repo, true, true);
     showUploads(staffDropzone, 'staff_uploads', data, repo, true, true);
-
-    // Populate existing form with JSON object from GET request
-
-    /*    $("#" + form_id).populate(data, {
-          phpIndices: false,
-          resetForm: true
-        });
-   */
 
     form.setData(data);
 
@@ -477,6 +471,7 @@ function loadForm(destinationSelector, data, fid, status, form_id, repo, allJSON
   if (docMode == "read") {
     // Open the document in read-only mode
     $("#" + form_id).find("input, textarea, select, button").attr('disabled', 'disabled');
+    $("#" + form_id).find("fieldset.form-control").attr('disabled', 'disabled');
     $(".dz-hidden-input").prop("disabled", true);
     $(".dz-remove").hide();
     $(".save-action").hide();

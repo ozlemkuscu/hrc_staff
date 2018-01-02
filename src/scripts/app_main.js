@@ -168,7 +168,6 @@ function listSubmissions(status, filter, repo, target) {
     let json = {};
     json.repo = repo;
     json.status = status == "Search" ? "" : (status == "All" ? "" : status);
-    //  json.filter = filter;
     json.filter = (status == "All" ? "status~(Yes)|(Submitted)|(Approved)" : filter);
 
     let args = "";
@@ -185,8 +184,7 @@ function listSubmissions(status, filter, repo, target) {
         defaultSortOrder: "des",
         addFooter: true,
         // dateFormat: 'YYYY/MM/DD h:mm:ss a'
-        dateFormat: config.dateFormatView,
-        ////   dateFormat: 'YYYY/MM/DD h:mm a',
+        dateFormat: config.dateTimeFormat,
         columnDefs: [
           { "targets": 0, data: null, title: '<span class="sr-only">' + app.data["View_Edit"] + '</span>', "defaultContent": `<a class="btn-default btn-view-edit-report"><span  title="View/Edit" class="glyphicon glyphicon-pencil"></span></a>` },
           { "targets": 1, data: 'caseManager', "title": app.data["Case Manager"], defaultContent: '', sortOrder: "des" },
@@ -273,17 +271,16 @@ function listSubmissions(status, filter, repo, target) {
         addFilter: true,
         defaultSortOrder: "des",
         addFooter: true,
-        dateFodatatarmat: config.dateTimeFormat3,
-        ////    dateFormat: 'YYYY/MM/DD h:mm a',
+        dateFormat: config.dateTimeFormat,
         columnDefs: [
           { "targets": 0, data: null, defaultContent: '', title: '<span class="sr-only">' + app.data["View_Edit"] + '</span>', "defaultContent": `<a class="btn-default btn-view-edit-report"><span title="View/Edit" class="glyphicon glyphicon-pencil"></span></a>` },
           {
             "targets": 1, defaultContent: '', title: app.data["Submission Date Column"], type: 'date',
             data: function (row, type, val, meta) {
               if (row.complaintCreated != "") {
-                return moment(new Date(row.complaintCreated)).format(config.dateTimeFormat3);
+                return moment(new Date(row.complaintCreated)).format(config.dateTimeFormat);
               }
-              return moment(row.created).format(config.dateTimeFormat3);
+              return moment(row.created).format(config.dateTimeFormat);
             }
           },
           { "targets": 2, data: function (row, type, val, meta) { return (row.firstName + " " + row.lastName); }, defaultContent: '', title: app.data["Name"] },
@@ -304,8 +301,7 @@ function listSubmissions(status, filter, repo, target) {
         addFilter: true,
         defaultSortOrder: "des",
         addFooter: true,
-        dateFormat: config.dateFormatView,
-        /////      dateFormat: 'YYYY/MM/DD h:mm a',
+        dateFormat: config.dateTimeFormat,
         columnDefs: [
           { "targets": 0, data: null, defaultContent: '', title: '<span class="sr-only">' + app.data["View_Edit"] + '</span>', "defaultContent": `<a class="btn-default btn-view-edit-report"><span title="View/Edit" class="glyphicon glyphicon-pencil"></span></a>` },
           { "targets": 1, data: function (row, type, val, meta) { return (row.firstName + " " + row.lastName); }, defaultContent: '', title: app.data["Name"] },
@@ -318,12 +314,13 @@ function listSubmissions(status, filter, repo, target) {
         ]
       }
     }
-
-
+ 
     var myDataTable = new cc_retrieve_view(args);
-
+    
     //render cc_retrieve_view
+    
     myDataTable.render();
+    
     $('.dataTables_filter').hide();
     $("#admin_search").on("keyup search input paste cut", function () {
       myDataTable.dt.search(this.value).draw();
@@ -483,6 +480,36 @@ function parseHash(newHash) {
   crossroads.parse(newHash);
 }
 function initFrontPage(data) {
+  // configuration fields, should be same as access configuration values
+  let cfg_groupMemberships = config.members.hrc_admin;
+
+  if (cfg_groupMemberships.length > 0) {
+    $.each(cfg_groupMemberships, function (i, group) {
+      // check if the logged in username is also in groups list
+      // if so put it in the groupmemberships values
+      if (group === oLogin.username) {
+        groupMemberships.push(oLogin.username);
+      }
+    })
+
+    // check if the user is in one of the application groups
+    // values taken from user cookie
+    let groupsStr = oLogin.groups;
+    // Save group names based on user's group permissions
+    if (data && (groupsStr !="")) {
+      for (let name in cfg_groupMemberships) {
+        if (groupsStr.indexOf(cfg_groupMemberships[name]) !== -1) {
+          groupMemberships.push(cfg_groupMemberships[name]);
+        }
+      }
+
+      hasher.initialized.add(parseHash); // Parse initial hash
+      hasher.changed.add(parseHash); // Parse hash changes
+      hasher.init(); // Start listening for history change
+    }
+  }
+}
+function initFrontPagePrev(data) {
   // configuration fields, should be same as access configuration values
   let cfg_groupMemberships = config.members.hrc_admin.split(',');
   $.each(cfg_groupMemberships, function (i, group) {
